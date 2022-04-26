@@ -1,16 +1,11 @@
 import Form from "./Form";
-import { useState, useEffect, useContext } from "react";
+import {useEffect, useContext } from "react";
 import List from "./List";
 import ThemeContext from "./Context/ThemeContext";
 import FormError from "./FormError";
 function Container() {
-    const { theme, formNull, setFormNull } = useContext(ThemeContext);
-    const [form, setForm] = useState({ name: "", surname: "" });
-    const [data, setData] = useState([
-        { name: "Ferhat", surname: "Macak" },
-        { name: "Yasef", surname: "Ertekin" },
-        { name: "İsmail", surname: "Gök" },
-    ]);
+    const { theme, formNull, setFormNull,form,setForm,data,setData } = useContext(ThemeContext);
+    
     const onChangeInput = (e) => {
         e.preventDefault();
         setForm({ ...form, [e.target.name]: e.target.value });
