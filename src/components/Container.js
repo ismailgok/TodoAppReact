@@ -17,16 +17,19 @@ function Container() {
     };
     useEffect(() => {
         setForm({ name: "", surname: "" });
-    }, [data]);
+    }, [data,formNull]);
     const onSubmitForm = () => {
-        if (form.name === "" && form.surname === "") {
+        if (form.name === "" || form.surname === "") {
             setFormNull(true);
+
+            setTimeout(() => {
+                setFormNull(false);
+            }, 2000);
+
+            return false;
         } else {
             setData([form, ...data]);
         }
-        setTimeout(() => {
-            setFormNull(false);
-        }, 2000);
     };
     return (
         <div
