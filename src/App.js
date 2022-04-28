@@ -1,12 +1,15 @@
-import React from 'react'
-import Container from './components/Container'
-import { ThemeContextProvider } from './components/Context/ThemeContext'
+import React from "react";
+import Container from "./components/Container";
+import { ThemeContextProvider } from "./components/Context/ThemeContext";
+import { UserContextProvider } from "./components/Context/UserContext";
 const App = () => {
-  return (
-    <ThemeContextProvider>
-        <Container />
-    </ThemeContextProvider>
-  )
-}
+    return (
+        <ThemeContextProvider>
+            <UserContextProvider>
+                <Container />
+            </UserContextProvider>
+        </ThemeContextProvider>
+    );
+};
 
-export default App
+export default App;

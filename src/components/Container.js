@@ -1,24 +1,25 @@
 import Form from "./Form";
-import {useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import List from "./List";
 import ThemeContext from "./Context/ThemeContext";
 import FormError from "./FormError";
+import UserContext from "./Context/UserContext";
+
 function Container() {
-    const { theme, formNull, setFormNull,form,setForm,data,setData } = useContext(ThemeContext);
-    
+    const { formIsNull, setFormIsNull, form, setForm, data, setData } =
+        useContext(UserContext);
+    const { theme } = useContext(ThemeContext);
+
     const onChangeInput = (e) => {
         e.preventDefault();
         setForm({ ...form, [e.target.name]: e.target.value });
     };
-    useEffect(() => {
-        setForm({ name: "", surname: "" });
-    }, [data,formNull]);
     const onSubmitForm = () => {
         if (form.name === "" || form.surname === "") {
-            setFormNull(true);
+            setFormIsNull(true);
 
             setTimeout(() => {
-                setFormNull(false);
+                setFormIsNull(false);
             }, 2000);
 
             return false;
@@ -26,6 +27,10 @@ function Container() {
             setData([form, ...data]);
         }
     };
+    
+    useEffect(() => {
+        setForm({ name: "", surname: "" });
+    }, [setForm,data, formIsNull]);
     return (
         <div
             className={
@@ -39,7 +44,7 @@ function Container() {
                 onChangeInput={onChangeInput}
                 onSubmitForm={onSubmitForm}
             />
-            {formNull === true ? <FormError /> : ""}
+            {formIsNull === true ? <FormError /> : ""}
             <List data={data} />
         </div>
     );
